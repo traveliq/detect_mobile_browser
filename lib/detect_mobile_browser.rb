@@ -1,7 +1,5 @@
 module DetectMobileBrowser
 
-  # Attention ! When changing the Regexen here, also change them in the Apache redirects of the Hotel Spezialseiten !
-
   # User-Agent strings matching this regexp mean the client is a mobile device, and the matched string will name the device (i.e. "android" etc.)
   NAMED_JEEJAHS = /android|avantgo|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(?:hone|od)|iris|kindle|lge |maemo|midp|mmp|opera m(?:ob|in)i|palm(?: os)?|phone|p(?:ixi|re)\/|plucker|pocket|psp|symbian|treo|up\.(?:browser|link)|vodafone|wap|windows (?:ce|phone)|xda|xiino/i
   # User-Agent strings (actually the first four characters) matching this regexp mean the client is some mobile device

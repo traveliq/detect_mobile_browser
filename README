@@ -1,13 +1,62 @@
-DetectMobileBrowser
+Detect Mobile Browser
 ===================
 
-Introduction goes here.
+This plugin provides helper methods for a Ruby on Rails application to detect which requests
+to the application are made from mobile clients.
 
+In addition, there are some methods that let you find out specific agents (like an iOS or Android) device, and
+some URL manipulation methods to make it easier to forward mobile clients to special mobile subdomains and vice versa.
+
+The device detection is based on a big Regular Expression, the source of which is http://detectmobilebrowser.com/ .
+
+There is also a simple session-based test system - it allows you to use a normal browser and force the plugin to
+pretend it's detecting a mobile browser.
 
 Example
 =======
 
-Example goes here.
+Install the plugin with
+<tt>
+script/plugin install git://github.com/traveliq/detect_mobile_browser.git
+</tt>
 
+and you're done. The plugin is tested with Rails 2.3.11 - it probably won't work with Rails 3.x. Contributions are welcome !
 
-Copyright (c) 2010 [name of plugin creator], released under the MIT license
+After restarting your server, you should see debugging output from the plugin in your development log on every request.
+
+You can then ask in any Controller #mobile_device?, which is true for the configured mobile devices.
+In addition, #mobile_device gives you a short name (like "android"), if the user agent matches a known, specific device class.
+#oldschool_browser? is true for any mobile device which is not an iOS or Android device - usually you want different, simpler
+views for those, and more sophisticated or specialised ones for the "newschools".
+
+There are shortcut methods for the newschools:
+
+#android?
+#iphone?
+#ipod?
+
+There are also methods to switch the subdomain of the current request's URL. Say that an Android phone has requested
+"www.example.com/query=waffles"
+Use mobilize_url(url) to turn it into
+"m.example.com/query=waffles"
+And demobilize_url(url) to turn it back.
+
+You can test the plugin even if you don't have a mobile device at hand by using the session switch.
+Add to any request URL to your app the parameters mobile=true and/or oldschool=true to force recognition as a mobile device in general or an oldschool device specifically.
+Use mobile/oldschool=false to force the recognition off (even if it would normally be recognized as mobile/oldschool),
+and mobile/oldschool=disable to switch the whole debug hack off.
+
+Author
+======
+
+Martin Tepper (monogreen.de)
+
+Contact
+=======
+
+For any questions, mail to developer@traveliq.net, or the Author(s).
+
+Copyright
+=========
+
+Copyright (c) 2010 Travel IQ, released under the MIT license
